@@ -1,4 +1,4 @@
-export default function taskBlock (trueOrFalse) {
+const taskBlock = function (trueOrFalse) {
   const task = false;
   const task2 = true;
 
@@ -7,4 +7,6 @@ export default function taskBlock (trueOrFalse) {
   }
 
   return [task, task2];
-}
+};
+
+export default taskBlock;
