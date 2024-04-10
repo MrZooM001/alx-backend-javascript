@@ -1,4 +1,4 @@
-export const { taskFirst, getLast, taskNext } = {
+const { taskFirst, getLast, taskNext } = {
   taskFirst: function () {
     return 'I prefer const when I can.';
   },
@@ -11,3 +11,5 @@ export const { taskFirst, getLast, taskNext } = {
     return combination;
   }
 };
+
+export { taskFirst, taskNext };
