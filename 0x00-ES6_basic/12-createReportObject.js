@@ -1,8 +1,6 @@
-export default function createReportObject(employeesList) {
+const createReportObject = (employeesList) => {
   const reportObj = {
-    allEmployees: {
-      ...employeesList
-    },
+    allEmployees: {...employeesList},
     getNumberOfDepartments(allEmployees) {
       let departmentsCount = 0;
       for (const employee in allEmployees) {
@@ -11,5 +9,8 @@ export default function createReportObject(employeesList) {
       return departmentsCount;
     },
   };
+
   return reportObj;
-}
+};
+
+export default createReportObject;
