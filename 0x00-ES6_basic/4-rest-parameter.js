@@ -1,4 +1,4 @@
-const returnHowManyArguments = (...args) => {
+const returnHowManyArguments = function (...args) {
   return args.length;
 };
 
