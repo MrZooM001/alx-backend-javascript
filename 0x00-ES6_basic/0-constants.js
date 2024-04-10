@@ -1,6 +1,5 @@
 const taskFirst = function () {
-  const task = 'I prefer const when I can.';
-  return task;
+  return 'I prefer const when I can.';
 };
 
 const getLast = function () {
