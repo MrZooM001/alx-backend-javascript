@@ -9,10 +9,10 @@ export class HolbertonClass {
   }
 
   set year(value) {
-    if (typeof value !== 'number') {
-      throw TypeError('Year must be a number');
-    } else {
+    if (typeof value === 'number') {
       this._year = value;
+    } else {
+      throw new TypeError('Year must be a number');
     }
   }
 
@@ -21,10 +21,10 @@ export class HolbertonClass {
   }
 
   set location(value) {
-    if (typeof value !== 'string') {
-      throw TypeError('Location must be a string');
-    } else {
+    if (typeof value === 'string') {
       this._location = value;
+    } else {
+      throw new TypeError('Location must be a string');
     }
   }
 }
@@ -44,18 +44,18 @@ export class StudentHolberton {
   }
 
   set firstName(value) {
-    if (typeof value !== 'string') {
-      throw TypeError('First name must be a string');
-    } else {
+    if (typeof value === 'string') {
       this._firstName = value;
+    } else {
+      throw new TypeError('First name must be a string');
     }
   }
 
   set lastName(value) {
-    if (typeof value !== 'string') {
-      throw TypeError('Last name must be a string');
-    } else {
+    if (typeof value === 'string') {
       this._lastName = value;
+    } else {
+      throw new TypeError('Last name must be a string');
     }
   }
 
@@ -64,7 +64,7 @@ export class StudentHolberton {
   }
 
   get fullStudentDescription() {
-    return `${this._firstName} ${this._lastName} - ${this._holbertonClass.year} - ${this._holbertonClass.location}`;
+    return `${this._firstName} ${this._lastName} - ${this._holbertonClass._year} - ${this._holbertonClass._location}`;
   }
 }
 

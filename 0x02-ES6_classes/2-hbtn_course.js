@@ -1,19 +1,23 @@
-export default class HolbertonCourse {
+class HolbertonCourse {
   constructor(name, length, students) {
-    this._name = typeof name === 'string' ? name : new TypeError('Name must be a string');
-    this._length = typeof length === 'number' ? length : new TypeError('Length must be a number');
-    this._students = Array.isArray(students) ? students : new TypeError('Students must be an array of strings');
+    if (typeof name !== 'string') { throw new TypeError('Name must be a string'); }
+    if (typeof length !== 'number') { throw new TypeError('Length must be a number'); }
+    if (!Array.isArray(students)) { throw new TypeError('Students must be an array'); }
+
+    this._name = name;
+    this._length = length;
+    this._students = students;
   }
 
   get name() {
     return this._name;
   }
 
-  set name(value) {
-    if (typeof value !== 'string') {
-      throw TypeError('Name must be a string');
+  set name(newName) {
+    if (typeof newName === 'string') {
+      this._name = newName;
     } else {
-      this._name = value;
+      throw TypeError('Name must be a string');
     }
   }
 
@@ -21,11 +25,11 @@ export default class HolbertonCourse {
     return this._length;
   }
 
-  set length(value) {
-    if (typeof value !== 'number') {
-      throw TypeError('Length must be a number');
+  set length(newLength) {
+    if (typeof newLength === 'number') {
+      this._length = newLength;
     } else {
-      this._length = value;
+      throw TypeError('Length must be a number');
     }
   }
 
@@ -33,11 +37,13 @@ export default class HolbertonCourse {
     return this._students;
   }
 
-  set students(value) {
-    if (Array.isArray(value) || value.every((student) => typeof student !== 'string')) {
-      throw TypeError('Students must be an array of strings');
+  set students(newStudents) {
+    if (Array.isArray(newStudents)) {
+      this._students = newStudents;
     } else {
-      this._students = value;
+      throw TypeError('Students must be an array');
     }
   }
 }
+
+export default HolbertonCourse;

@@ -18,6 +18,7 @@ export default class EVCar extends Car {
     }
   }
 
+  /* eslint-disable class-methods-use-this */
   cloneCar() {
     return new Car();
   }
