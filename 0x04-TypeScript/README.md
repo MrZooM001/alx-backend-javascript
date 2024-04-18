@@ -3,3 +3,4 @@
 ***Scope*** `JavaScript` `TypeScript`
 ## ***Tasks***
 * **[0. Creating an interface for a student](task_0/js/main.ts)**
+* **[1. Let's build a Teacher interface](task_0/js/main.ts)**
