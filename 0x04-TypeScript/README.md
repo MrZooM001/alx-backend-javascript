@@ -11,3 +11,5 @@
 * **[6. Creating functions specific to employees](task_0/js/main.ts)**
 * **[7. String literal types](task_2/js/main.ts)**
 * **[8. Ambient Namespaces](task_2/js/main.ts)**
+* **[9. Namespace & Declaration merging - Subject](task_4/js/subjects/Subject.ts)**
+* **[9. Namespace & Declaration merging - Teacher](task_4/js/subjects/Teacher.ts)**
