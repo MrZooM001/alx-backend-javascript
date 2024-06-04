@@ -20,13 +20,13 @@ const countStudents = (path) => {
     const field = record[record.length - 1];
     groups[field] = groups[field] || [];
 
-    // eslint-disable-next-line max-len
-    groups[field].push(Object.fromEntries(studentNames.map((name, index) => [name, values[index]])));
+    groups[field].push(Object.fromEntries(studentNames
+      .map((name, index) => [name, values[index]])));
     return groups;
   }, {});
 
-  // eslint-disable-next-line max-len
-  const totalStudents = Object.values(studentGroups).reduce((previous, current) => previous + current.length, 0);
+  const totalStudents = Object.values(studentGroups)
+    .reduce((previous, current) => previous + current.length, 0);
   console.log(`Number of students: ${totalStudents}`);
 
   for (const [field, group] of Object.entries(studentGroups)) {
