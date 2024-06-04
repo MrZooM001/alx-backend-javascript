@@ -3,3 +3,5 @@
 **/dist/
 **/*main.js
 **/run.sh
+*.json
+.eslintrc.js
