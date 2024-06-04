@@ -3,14 +3,15 @@ const fs = require('fs');
 /**
  * Count students in a specific field
 *
-* @param {str} path: database .csv file path
+* @param {string} path: database .csv file path
 */
 const countStudents = (path) => {
   if (!fs.existsSync(path) || !fs.statSync(path).isFile()) {
     throw new Error('Cannot load the database');
   }
 
-  const lines = fs.readFileSync(path, 'utf-8').trim().split('\n');
+  const data = fs.readFileSync(path, 'utf-8');
+  const lines = data.trim().split('\n');
   const studentNames = lines.shift().split(',').slice(0, -1);
 
   /* eslint-disable no-param-reassign */
