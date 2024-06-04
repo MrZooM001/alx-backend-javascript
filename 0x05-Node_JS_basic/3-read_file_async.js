@@ -18,24 +18,24 @@ const countStudents = (path) => new Promise((resolve, reject) => {
         return;
       }
       const lines = data.trim().split('\n');
-      const studentNames = lines.shift().split(',').slice(0, -1);
+      const studentNames = lines.shift().split(',').slice(0);
 
       /* eslint-disable no-param-reassign */
       const studentGroups = lines.reduce((groups, line) => {
         if (line.trim() === '') return groups;
 
         const record = line.split(',');
-        const values = record.slice(0, -1);
+        const values = record.slice(0);
         const field = record[record.length - 1];
         groups[field] = groups[field] || [];
 
-        groups[field].push(Object.fromEntries(studentNames
-          .map((name, index) => [name, values[index]])));
+        // eslint-disable-next-line max-len
+        groups[field].push(Object.fromEntries(studentNames.map((name, index) => [name, values[index]])));
         return groups;
       }, {});
 
-      const totalStudents = Object.values(studentGroups)
-        .reduce((previous, current) => previous + current.length, 0);
+      // eslint-disable-next-line max-len
+      const totalStudents = Object.values(studentGroups).reduce((previous, current) => previous + current.length, 0);
       console.log(`Number of students: ${totalStudents}`);
 
       for (const [field, group] of Object.entries(studentGroups)) {
