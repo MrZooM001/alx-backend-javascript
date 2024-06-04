@@ -22,6 +22,8 @@ const countStudents = (path) => new Promise((resolve, reject) => {
 
       /* eslint-disable no-param-reassign */
       const studentGroups = lines.reduce((groups, line) => {
+        if (line.trim() === '') return groups;
+
         const record = line.split(',');
         const values = record.slice(0, -1);
         const field = record[record.length - 1];
