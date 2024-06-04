@@ -3,7 +3,7 @@
  *
  * @param {string} message
  */
-function displayMessage (message) {
+function displayMessage(message) {
   console.log(message);
 }
 
