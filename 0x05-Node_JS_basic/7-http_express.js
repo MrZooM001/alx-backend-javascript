@@ -1,8 +1,9 @@
-const http = require('http');
+const express = require('express');
 const fs = require('fs');
 
 
-const app = http.createServer();
+const app = express();
+const port = 1245;
 const dbFile = process.argv.length > 2 ? process.argv[2] : '';
 
 const countStudents = (path) => new Promise((resolve, reject) => {
@@ -23,7 +24,7 @@ const countStudents = (path) => new Promise((resolve, reject) => {
         const studentNames = dbField.slice(0, dbField.length - 1);
 
         for (const line of lines.slice(1)) {
-          if (line.trim() === '') continue;
+          // if (line.trim() === '') continue;
 
           const record = line.split(',');
           const values = record.slice(0, record.length - 1);
@@ -53,53 +54,32 @@ const countStudents = (path) => new Promise((resolve, reject) => {
   }
 });
 
-const serverRoutes = [
-  {
-    route: '/',
-    handler(_, res) {
-      const text = 'Hello Holberton School!';
-
-      res.setHeader('Content-Type', 'text/plain');
-      res.setHeader('Content-Length', text.length);
-      res.statusCode = 200;
-      res.write(Buffer.from(text));
-    },
-  },
-  {
-    route: '/students',
-    handler(_, res) {
-      const response = ['This is the list of our students'];
-
-      countStudents(dbFile).then((report) => {
-        response.push(report);
-        const text = response.join('\n');
-        res.setHeader('Content-Type', 'text/plain');
-        res.setHeader('Content-Length', text.length);
-        res.statusCode = 200;
-        res.write(Buffer.from(text));
-      }).catch((err) => {
-        response.push(err instanceof Error ? err.message : err.toString());
-        const text = response.join('\n');
-        res.setHeader('Content-Type', 'text/plain');
-        res.setHeader('Content-Length', text.length);
-        res.statusCode = 200;
-        res.write(Buffer.from(text));
-      });
-    },
-  }
-];
-
-app.on('request', (req, res) => {
-  for (const routeHandler of serverRoutes) {
-    if (routeHandler.route === req.url) {
-      routeHandler.handler(req, res);
-      break;
-    }
-  }
+app.get('/', (_, res) => {
+  res.send('Hello Holberton School!');
 });
 
-app.listen(1245, 'localhost', () => {
-  process.stdout.write(`small HTTP server is listening on: http://localhost:1245\n`);
+app.get('/students', (_, res) => {
+  const response = ['This is the list of our students'];
+
+  countStudents(dbFile).then((report) => {
+    response.push(report);
+    const text = response.join('\n');
+    res.setHeader('Content-Type', 'text/plain');
+    res.setHeader('Content-Length', text.length);
+    res.statusCode = 200;
+    res.write(Buffer.from(text));
+  }).catch((err) => {
+    response.push(err instanceof Error ? err.message : err.toString());
+    const text = response.join('\n');
+    res.setHeader('Content-Type', 'text/plain');
+    res.setHeader('Content-Length', text.length);
+    res.statusCode = 200;
+    res.write(Buffer.from(text));
+  });
+});
+
+app.listen(port, () => {
+  console.log(`more complex express server is listening on: ${port}`);
 });
 
 module.exports = app;
