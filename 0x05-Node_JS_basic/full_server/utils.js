@@ -1,10 +1,6 @@
-const http = require('http');
 const fs = require('fs');
 
-const app = http.createServer();
-const dbFile = process.argv.length > 2 ? process.argv[2] : '';
-
-const countStudents = (path) => new Promise((resolve, reject) => {
+const readDatabase = (path) => new Promise((resolve, reject) => {
   if (!path) {
     reject(new Error('Cannot load the database'));
   }
@@ -53,53 +49,5 @@ const countStudents = (path) => new Promise((resolve, reject) => {
   }
 });
 
-const serverRoutes = [
-  {
-    route: '/',
-    handler(_, res) {
-      const text = 'Hello Holberton School!';
-
-      res.setHeader('Content-Type', 'text/plain');
-      res.setHeader('Content-Length', text.length);
-      res.statusCode = 200;
-      res.write(Buffer.from(text));
-    },
-  },
-  {
-    route: '/students',
-    handler(_, res) {
-      const response = ['This is the list of our students'];
-
-      countStudents(dbFile).then((report) => {
-        response.push(report);
-        const text = response.join('\n');
-        res.setHeader('Content-Type', 'text/plain');
-        res.setHeader('Content-Length', text.length);
-        res.statusCode = 200;
-        res.write(Buffer.from(text));
-      }).catch((err) => {
-        response.push(err instanceof Error ? err.message : err.toString());
-        const text = response.join('\n');
-        res.setHeader('Content-Type', 'text/plain');
-        res.setHeader('Content-Length', text.length);
-        res.statusCode = 200;
-        res.write(Buffer.from(text));
-      });
-    },
-  },
-];
-
-app.on('request', (req, res) => {
-  for (const routeHandler of serverRoutes) {
-    if (routeHandler.route === req.url) {
-      routeHandler.handler(req, res);
-      break;
-    }
-  }
-});
-
-app.listen(1245, 'localhost', () => {
-  process.stdout.write('small HTTP server is listening on: http://localhost:1245');
-});
-
-module.exports = app;
+export default readDatabase;
+module.exports = readDatabase;
